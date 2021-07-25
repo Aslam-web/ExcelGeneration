@@ -14,10 +14,8 @@ import java.util.Set;
 import javax.mail.Message;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.BuiltinFormats;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
-import org.apache.poi.ss.usermodel.DataFormat;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -171,7 +169,6 @@ class GradeTenController {
 			}
 			sheet.autoSizeColumn(0);
 			sheet.autoSizeColumn(1);
-			sheet.
 
 			// actual writing happens :
 			workbook.write(output);
@@ -185,9 +182,9 @@ class GradeTenController {
 		return attachmentLocation;
 	}
 
-	private void sendSingleExcel(StudentGradeTen s, String attachment) {
-//		sendControler.createSession("sample@gmail.com", "********", s);
-		sendControler.createSession(Dotenv.load().get("MY_ACCOUNT_EMAIL"), Dotenv.load().get("MY_ACCOUNT_PASSWORD"), s);
+	private void sendSingleExcel(StudentGradeTen student, String attachment) {
+//		sendControler.createSession("sample@gmail.com", "********", student);
+		sendControler.createSession(Dotenv.load().get("MY_ACCOUNT_EMAIL"), Dotenv.load().get("MY_ACCOUNT_PASSWORD"), student);
 		Message message = sendControler.createMimeMessage(attachment);
 		sendControler.send(message);
 	}

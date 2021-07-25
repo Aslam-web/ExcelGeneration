@@ -5,7 +5,6 @@ import java.util.Map;
 import java.util.Properties;
 
 import javax.mail.Authenticator;
-import javax.mail.BodyPart;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Multipart;
@@ -25,13 +24,11 @@ class SendController {
 
 	private Student s;
 	private String fromEmail;
-	private String password;
 	private String toEmail;
 
 	public void createSession(String fromEmail, String password, Student student) {
 
 		this.fromEmail = fromEmail;
-		this.password = password;
 		this.s = student;
 
 		Map<String, String> m = new HashMap<>();
