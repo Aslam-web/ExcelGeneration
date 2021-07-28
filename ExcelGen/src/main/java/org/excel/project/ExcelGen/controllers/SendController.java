@@ -24,7 +24,6 @@ class SendController {
 
 	private Student s;
 	private String fromEmail;
-	private String toEmail;
 
 	public void createSession(String fromEmail, String password, Student student) {
 
@@ -79,11 +78,10 @@ class SendController {
 
 			message.setContent(multipart);
 
-			System.out.println("Message Sending to: " + s.getParentEmail());
-
 		} catch (Exception e) {
-			System.out.printf("SOME ERROR OCCURED IN CREATING EMAIL TO %s!!!\n", s.getParentEmail());
+			System.out.printf("ERROR OCCURED WHILE CREATING EMAIL FOR %s!!!\n", s.getParentEmail());
 			e.printStackTrace();
+			return null;
 		}
 
 		return message;
@@ -93,14 +91,15 @@ class SendController {
 	public boolean send(Message message) {
 
 		try {
-
+			
+			System.out.printf("Sending email to parent: %s <%s>\n" , s.getParentName(),s.getParentEmail());
 			Transport.send(message);
-			System.out.printf("Message successfully sent to: <%s>; Parent : %s; Student : %s\n",
+			System.out.printf("Message successfully sent to: <%s>\nParent Name: %s, Student Name: %s\n",
 					s.getParentEmail(), s.getParentName(), s.getStudentName());
 
 			return true;
-		} catch (MessagingException e) {
-			System.out.print("MESSAGE SENDING FAILED TO: <" + this.toEmail + ">");
+		} catch (Exception e) {
+			System.out.print("MESSAGE SENDING FAILED TO: <" + s.getParentEmail() + ">");
 			System.out.println("\tProblem : " + e.getMessage());
 			return false;
 		}
